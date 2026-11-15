@@ -1,0 +1,40 @@
+name: local-fixture
+allow_loopback: true
+allow_private: false
+allow_public: false
+hosts:
+  - host: 127.0.0.1
+    scheme: http
+    ports: [8765]
+  - host: localhost
+    scheme: http
+    ports: [8765]
+    # Every address returned for this name must be listed. On this machine
+    # localhost is 127.0.0.1 only. If it also resolves to ::1, add ::1 here
+    # or drop this hostname entry.
+    addresses: ["127.0.0.1"]
+path_prefixes:
+  - /
+limits:
+  timeout_seconds: 3
+  concurrency: 1
+  rate_limit_rps: 5
+recon:
+  - dns
+  - http
+checks:
+  - open_redirect
+  - debug_exposure
+open_redirect:
+  parameter: next
+  canary_url: https://scopeguard.invalid/sg-canary
+  endpoints:
+    - http://127.0.0.1:8765/redirect
+debug_exposure:
+  marker: SG_FIXTURE_DEBUG_TOKEN
+  endpoints:
+    - http://127.0.0.1:8765/debug
+output:
+  formats:
+    - json
+    - markdown
