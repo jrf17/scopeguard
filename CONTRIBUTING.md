@@ -1,6 +1,6 @@
 # Contributing
 
-Run the checks from a clean checkout:
+Install [uv](https://docs.astral.sh/uv/getting-started/installation/) if `uv --version` fails, then open a new shell. Run the checks from a clean checkout:
 
 ```bash
 uv sync --all-groups

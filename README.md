@@ -10,12 +10,22 @@ Use ScopeGuard only against systems you are permitted to test. The local fixture
 
 ## Install
 
-Requires Python 3.12 or newer and [uv](https://docs.astral.sh/uv/).
+Requires Python 3.12 or newer. ScopeGuard uses [uv](https://docs.astral.sh/uv/) to create the virtual environment and install the locked dependencies. `uv` is not part of a normal Python install. If `uv --version` fails, install it, then open a new shell so the installer change to `PATH` is visible:
+
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
+Inspect the script before running it if you prefer: `curl -LsSf https://astral.sh/uv/install.sh | less`. Other install methods, including a pinned version, are on the [uv installation page](https://docs.astral.sh/uv/getting-started/installation/).
+
+From a checkout of this repository:
 
 ```bash
 uv sync --all-groups
 uv run scopeguard --help
 ```
+
+`uv sync` installs the project into `.venv`. Use `uv run` for the commands below so that environment is selected. You do not need to activate it.
 
 ## Local demonstration
 
